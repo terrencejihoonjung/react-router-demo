@@ -17,23 +17,28 @@ import "./index.css";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Router>
     <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/myapps" element={<Navigate replace to="/learn" />} />
-      <Route path="/learn" element={<Learn />}>
+      <Route index element={<Home />} />
+      <Route path="learn" element={<Learn />}>
         <Route path="courses" element={<Courses />}>
           <Route path=":courseid" element={<CourseId />} />
         </Route>
         <Route path="bundles" element={<Bundles />} />
       </Route>
-      <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="dashboard" element={<Dashboard />} />
+      <Route path="*" element={<NoMatch />} />
     </Routes>
   </Router>
 );
+
+function NoMatch() {
+  return <p>There's nothing here: 404!</p>;
+}
 
 function Home() {
   return (
     <div>
       <h1>Home Route</h1>
+      <Link to="/learn">Learn</Link>
     </div>
   );
 }
